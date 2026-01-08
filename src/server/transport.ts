@@ -97,6 +97,12 @@ export async function setupHttpServer(mcpServer: Server): Promise<void> {
     });
   });
 
+  // OpenAI domain verification endpoint
+  app.get('/.well-known/openai-apps-challenge', (req, res) => {
+    res.type('text/plain');
+    res.send('5pdRJeLm1mFKd4MY2eUsgIFeotq-uBR341nDDMhJ6iM');
+  });
+
   // Create transport instance in stateless mode (allows multiple initialize attempts)
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
