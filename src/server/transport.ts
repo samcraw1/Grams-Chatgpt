@@ -37,12 +37,6 @@ export async function setupHttpServer(mcpServer: Server): Promise<void> {
   app.get('/mcp', async (req, res) => {
     logger.info('MCP connection established');
 
-    res.writeHead(200, {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive',
-    });
-
     const transport = new SSEServerTransport('/message', res);
     await mcpServer.connect(transport);
 
