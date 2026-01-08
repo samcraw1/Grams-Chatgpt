@@ -1,0 +1,12 @@
+version: "2"
+# Get your auth token from: https://dashboard.ngrok.com/get-started/your-authtoken
+# authtoken: YOUR_NGROK_TOKEN_HERE
+
+tunnels:
+  grams-mcp:
+    addr: 3000
+    proto: http
+    schemes:
+      - https
+    # Optional: Add custom domain if you have ngrok paid plan
+    # domain: grams.ngrok.app
