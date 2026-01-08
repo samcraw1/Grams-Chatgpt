@@ -33,9 +33,9 @@ export async function setupHttpServer(mcpServer: Server): Promise<void> {
     });
   });
 
-  // MCP SSE endpoint
-  app.get('/sse', async (req, res) => {
-    logger.info('SSE connection established');
+  // MCP endpoint
+  app.get('/mcp', async (req, res) => {
+    logger.info('MCP connection established');
 
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -47,7 +47,7 @@ export async function setupHttpServer(mcpServer: Server): Promise<void> {
     await mcpServer.connect(transport);
 
     req.on('close', () => {
-      logger.info('SSE connection closed');
+      logger.info('MCP connection closed');
     });
   });
 
@@ -63,7 +63,7 @@ export async function setupHttpServer(mcpServer: Server): Promise<void> {
   app.listen(port, () => {
     logger.info(`✓ Grams ChatGPT MCP Server ready!`);
     logger.info(`  HTTP server: http://localhost:${port}`);
-    logger.info(`  SSE endpoint: http://localhost:${port}/sse`);
+    logger.info(`  MCP endpoint: http://localhost:${port}/mcp`);
     logger.info(`  Health check: http://localhost:${port}/health`);
 
     if (!config.anthropicApiKey) {
